@@ -1,0 +1,9 @@
+---
+# tasks file for ansible-yacy
+- name: Install Java
+  package: name=java state=present
+  become: yes
+
+- name: Install Yacy
+  unarchive: src=http://yacy.net/release/yacy_v1.90_20160704_9000.tar.gz dest=/opt/ copy=no
+  become: yes
