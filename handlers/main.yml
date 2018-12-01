@@ -1,2 +1,12 @@
 ---
 # handlers file for ansible-yacy
+- name: systemd restart yacy daemon-reload
+  systemd:
+    state: restarted
+    name: yacy
+    daemon_reload: yes
+
+- name: restart yacy
+  service:
+    name: "{{ yacy_service }}"
+    state: restarted
