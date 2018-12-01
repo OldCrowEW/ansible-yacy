@@ -4,7 +4,7 @@
   systemd:
     state: restarted
     name: yacy
-    daemon_reload: yes
+    daemon_reload: true
 
 - name: restart yacy
   service:

@@ -31,7 +31,7 @@
     dest: "{{ yacy_install_dir }}"
     owner: "{{ yacy_user }}"
     group: "{{ yacy_group }}"
-    remote_src: yes
+    remote_src: true
     extra_opts: "--strip-components=1"
   args:
     creates: "{{ yacy_install_dir }}/AUTHORS"
@@ -44,7 +44,6 @@
     group: "{{ yacy_group }}"
     state: link
 
-
 - name: Write Systemd Unit file
   template:
     src: yacy-systemd.conf.j2
@@ -52,7 +51,8 @@
   notify:
     - systemd restart yacy daemon-reload
 
-- name: Ensure Yacy is started
+- name: Ensure Yacy is started and enabled
   service:
     name: "{{ yacy_service }}"
     state: "{{ yacy_service_state }}"
+    enabled: true
