@@ -1,37 +1,32 @@
-Role Name
-=========
+# Ansible Role: Yacy
+
+[![Build Status](https://travis-ci.org/OldCrowEW/ansible-yacy.svg?branch=master)](https://travis-ci.org/OldCrowEW/ansible-yacy)
 
 A distributed Web crawler and caching HTTP/HTTPS proxy built on the principles of peer-to-peer (P2P) networks
 
 
-Requirements
-------------
+## Requirements
 
 N/A
 
-Role Variables
---------------
+## Role Variables
 
 N/A
 
-Dependencies
-------------
+## Dependencies
 
 N/A
 
-Example Playbook
-----------------
+## Example Playbook
 
     - hosts: servers
       roles:
          - oldcrowew.yacy
 
-License
--------
+## License
 
 MIT
 
-Author Information
-------------------
+## Author Information
 
 John Favorite

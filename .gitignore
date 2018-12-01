@@ -3,3 +3,7 @@
 *.iml
 out
 gen
+
+# Python stuff
+.pyc
+__pycache__
