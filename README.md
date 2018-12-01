@@ -1,5 +1,6 @@
-Role Name
+# Ansible Role: Yacy
 =========
+[![Build Status](https://travis-ci.org/oldcrowew/ansible-yacy.svg?branch=master)](https://travis-ci.org/oldcrowew/ansible-yacy)
 
 A distributed Web crawler and caching HTTP/HTTPS proxy built on the principles of peer-to-peer (P2P) networks
 
