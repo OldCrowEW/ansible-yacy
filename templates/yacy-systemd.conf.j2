@@ -1,0 +1,24 @@
+[Unit]
+Description=Yacy distributed search engine
+
+[Service]
+
+#Service
+Type=forking
+GuessMainPID=yes
+ExecStart={{ yacy_dir }}/startYACY.sh
+ExecStop={{ yacy_dir }}/stopYACY.sh
+User={{ yacy_user }}
+Group={{ yacy_group }}
+WorkingDirectory={{ yacy_dir }}
+
+# Hardening
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=full
+ProtectHome=yes
+NoNewPrivileges=yes
+DevicePolicy=closed
+
+[Install]
+WantedBy=multi-user.target

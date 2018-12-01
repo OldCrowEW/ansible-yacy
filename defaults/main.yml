@@ -1,2 +1,25 @@
 ---
 # defaults file for ansible-yacy
+yacy_service: "yacy"
+yacy_service_state: "started"
+
+yacy_version: "{{ yacy_version_major }}_{{ yacy_version_minor }}"
+yacy_version_major: "1.92"
+yacy_version_minor: "20161226_9000"
+
+yacy_download_file: "{{ yacy_version }}.tar.gz"
+yacy_download_url: "https://yacy.net/release/yacy_v{{ yacy_download_file }}"
+
+yacy_user: "yacy"
+yacy_user_exists_state: "present"
+yacy_user_comment: "Yacy Service Account"
+yacy_user_shell: "/usr/sbin/nologin"
+yacy_group: "yacy"
+yacy_group_exists_state: "present"
+
+install_prefix: ""
+sysconfdir: "{{ install_prefix }}/etc"
+systemd_conf_dir: "{{ sysconfdir }}/systemd/system"
+unbundled_pkgs_dir: "{{ install_prefix }}/opt"
+yacy_dir: "{{ unbundled_pkgs_dir }}/{{ yacy_service }}"
+yacy_install_dir: "{{ unbundled_pkgs_dir }}/{{ yacy_service }}-{{ yacy_version_major }}_{{ yacy_version_minor }}"

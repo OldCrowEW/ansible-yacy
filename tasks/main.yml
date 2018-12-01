@@ -1,9 +1,58 @@
 ---
 # tasks file for ansible-yacy
-- name: Install Java
-  package: name=java state=present
-  become: yes
+- name: Install OpenJDK Java
+  yum:
+    name: java
+    state: present
 
-- name: Install Yacy
-  unarchive: src=http://yacy.net/release/yacy_v1.90_20160704_9000.tar.gz dest=/opt/ copy=no
-  become: yes
+- name: Ensure Yacy group exists
+  group:
+    name: "{{ yacy_group }}"
+    state: "{{ yacy_group_exists_state }}"
+
+- name: Ensure Yacy user exists
+  user:
+    name: "{{ yacy_user }}"
+    comment: "{{ yacy_user_comment }}"
+    shell: "{{ yacy_user_shell }}"
+    group: "{{ yacy_group }}"
+    state: "{{ yacy_user_exists_state }}"
+
+- name: Ensure {{ yacy_install_dir }} exists
+  file:
+    name: "{{ yacy_install_dir }}"
+    owner: "{{ yacy_user }}"
+    group: "{{ yacy_group }}"
+    state: directory
+
+- name: Download and unarchive Yacy
+  unarchive:
+    src: "{{ yacy_download_url }}"
+    dest: "{{ yacy_install_dir }}"
+    owner: "{{ yacy_user }}"
+    group: "{{ yacy_group }}"
+    remote_src: yes
+    extra_opts: "--strip-components=1"
+  args:
+    creates: "{{ yacy_install_dir }}/AUTHORS"
+
+- name: Symlink {{ yacy_install_dir }} -> {{ unbundled_pkgs_dir }}/{{ yacy_service }}
+  file:
+    src: "{{ yacy_install_dir }}"
+    dest: "{{ yacy_dir }}"
+    owner: "{{ yacy_user }}"
+    group: "{{ yacy_group }}"
+    state: link
+
+
+- name: Write Systemd Unit file
+  template:
+    src: yacy-systemd.conf.j2
+    dest: "{{ systemd_conf_dir }}/{{ yacy_service }}.service"
+  notify:
+    - systemd restart yacy daemon-reload
+
+- name: Ensure Yacy is started
+  service:
+    name: "{{ yacy_service }}"
+    state: "{{ yacy_service_state }}"
