@@ -3,11 +3,16 @@ language: python
 services:
   - docker
 
-# Install ansible
+# Install python-pip
 addons:
   apt:
     packages:
       - python-pip
+
+# Install docker-engine
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
 
 install:
   # Install molecule
