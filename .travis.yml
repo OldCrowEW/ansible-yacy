@@ -1,5 +1,4 @@
 ---
-sudo: required
 language: python
 services:
   - docker
@@ -10,14 +9,9 @@ addons:
     packages:
       - python-pip
 
-# Install docker-engine
-before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-ce
-
 install:
   # Install molecule
-  - pip install molecule
+  - pip install molecule docker
 
   # Check molecule version
   - molecule --version
