@@ -1,9 +1,10 @@
 galaxy_info:
   author: "John Favorite"
-  description: A distributed Web crawler and caching HTTP/HTTPS proxy built on the principles of peer-to-peer (P2P) networks
-  license: 
+  description: Distributed Web crawler & caching HTTP/HTTPS proxy built on the principles of peer-to-peer (P2P) networks
+  company: n/a
+  license:
     - MIT
-  min_ansible_version: 2.1
+  min_ansible_version: 2.4
   platforms:
     - name: EL
       versions:
